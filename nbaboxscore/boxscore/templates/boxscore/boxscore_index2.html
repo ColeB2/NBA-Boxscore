@@ -1,0 +1,42 @@
+{% extends "boxscore/base.html" %}
+{% load static %}
+{% load django_tables2 %}
+{% load render_table from django_tables2 %}
+
+<link href="{% static "boxscore/css/main.css" %}" rel="stylesheet">
+{% block page_content %}
+
+
+<!--Game Scores-->
+{% for key, value in scores.items %}
+<p><a href="#{{value.ID}}">
+    {{key}}:
+    <span>{{value.HT}} {{value.HS}}</span>
+    <span>{{value.VT}} {{value.VS}}</span>
+</a></p>
+{% endfor %}
+
+
+
+<!--Boxscores-->
+{% for table in tables %}
+
+<h1 id="{{table.data.0.game.id}}">
+  <span>{{table.data.0.team.full_name}}</span>
+  {% if table.data.0.game.home_team_id == table.data.0.team.id %}
+      <span>{{table.data.0.game.home_team_score}}</span>
+  {% else %}
+      <span>{{table.data.0.game.visitor_team_score}}</span>
+  {% endif %}
+</h1>
+
+
+
+
+<div class="row table-responsive">
+    {% render_table table %}
+</div>
+{% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "boxscore/base.html" %}
+{% load static %}
+
+
+{% block page_content %}
+
+
+<!--Game Scores-->
+<h3>Yesterday's Games</h3>
+{% for key, value in scores.items %}
+<p><a href="#{{value.ID}}">
+    {{key}}:
+    <span>{{value.HT}} {{value.HS}}</span>
+    <span>{{value.VT}} {{value.VS}}</span>
+</a></p>
+{% endfor %}
+
+<h1 class="text-center">Box Scores</h1>
+{% for boxscore in boxscores %}
+    <h2 id="{{boxscore.0.game.id}}" class="text-center">
+        <span>{{boxscore.0.team.full_name}}</span>
+        {% if boxscore.0.team.id == boxscore.0.game.home_team_id %}
+        <span>{{boxscore.0.game.home_team_score}}</span>
+        {% else %}
+        <span>{{boxscore.0.game.visitor_team_score}}</span>
+        {% endif %}
+    </h2>
+
+    <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{boxscore.0.team.city}}</th>
+                <th>MIN</th>
+                <th>PTS</th>
+                <th>FG</th>
+                <th>3P</th>
+                <th>FT</th>
+                <th>OR</th>
+                <th>REB</th>
+                <th>AST</th>
+                <th>BLK</th>
+                <th>STL</th>
+                <th>TO</th>
+                <th>PF</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player_stats in boxscore %}
+            <tr>
+                <td class="player_name">{{player_stats.player.first_name}} {{player_stats.player.last_name}}</td>
+                <td>{{player_stats.min}}</td>
+                <td>{{player_stats.pts}}</td>
+                <td>{{player_stats.fgm}}-{{player_stats.fga}}</td>
+                <td>{{player_stats.fg3m}}-{{player_stats.fg3a}}</td>
+                <td>{{player_stats.ftm}}-{{player_stats.fta}}</td>
+                <td>{{player_stats.oreb}}</td>
+                <td>{{player_stats.reb}}</td>
+                <td>{{player_stats.ast}}</td>
+                <td>{{player_stats.blk}}</td>
+                <td>{{player_stats.stl}}</td>
+                <td>{{player_stats.turnover}}</td>
+                <td>{{player_stats.pf}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endfor %}
+
+
+
+
+{% endblock %}
