@@ -56,6 +56,13 @@ def create_boxscore_objects():
     return boxscores
 
 
+
+def get_boxscore_game_id(game_id=None):
+    boxscore = BoxScore(game_id=game_id)
+    return boxscore
+
+
+
 def split_boxscores(data):
     """Splits the boxscores into a home and away team for easier html table
     management"""
@@ -67,3 +74,19 @@ def split_boxscores(data):
 
 def get_boxscores():
     return split_boxscores(create_boxscore_objects())
+
+
+
+def split_boxscore(data):
+    """
+    Splits a single boxscore into a home and away team for
+    easier html table management
+    """
+    table_list = []
+    table_list.append(data.hTeam)
+    table_list.append(data.vTeam)
+    return table_list
+
+
+def get_game_boxscore(game_id):
+    return split_boxscore(get_boxscore_game_id(game_id))

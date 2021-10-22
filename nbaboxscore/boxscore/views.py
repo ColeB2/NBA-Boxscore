@@ -1,7 +1,7 @@
 # from django.shortcuts import render
 from django.views.generic.base import TemplateView
 
-from .custom import get_boxscores, get_scoreboard_scores
+from .custom import get_boxscores, get_scoreboard_scores, get_game_boxscore
 from .customtest import get_api_reqTEST, get_scoreboard_scoresTEST, get_boxscoresT
 import datetime
 
@@ -51,7 +51,8 @@ class BoxscoreGameView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['scores'] = get_scoreboard_scores()
+        print(f"self.kwargs*--------------------{self.kwargs}")
+        context['boxscore'] = get_game_boxscore(self.kwargs["game_id"])
         return context
 
 
