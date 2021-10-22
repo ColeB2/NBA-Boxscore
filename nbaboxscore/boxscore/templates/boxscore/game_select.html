@@ -1,0 +1,28 @@
+{% extends "boxscore/base.html" %}
+{% load static %}
+
+
+{% block page_content %}
+
+
+<!--Game Scores-->
+{% if scores.items is not None %}
+<h3>{{scores.G1.DATE}}</h3>
+{% endif %}
+
+<!--Game Scores Results Table-->
+<div class="table-responsive">
+    <table class="table">
+    {% for key, value in scores.items %}
+        <td class="game-score">
+            <a href="#{{value.ID}}">
+                <span>{{value.VT}} {{value.VS}}</span><br>
+                <span>{{value.HT}} {{value.HS}}</span>
+            </a>
+        </td>
+
+    {% endfor %}
+    </table>
+</div>
+
+{% endblock page_content %}

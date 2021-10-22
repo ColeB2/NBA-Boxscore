@@ -36,6 +36,25 @@ class BoxScoreTodayView(TemplateView):
         return context
 
 
+class GameSelectView(TemplateView):
+    template_name = "boxscore/game_select.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['scores'] = get_scoreboard_scores()
+        return context
+
+
+class BoxscoreGameView(TemplateView):
+    template_name = "boxscore/game_view.html"
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['scores'] = get_scoreboard_scores()
+        return context
+
+
 
 
 
