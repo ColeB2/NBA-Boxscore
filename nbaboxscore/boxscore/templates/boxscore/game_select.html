@@ -15,7 +15,7 @@
     <table class="table">
     {% for key, value in scores.items %}
         <td class="game-score">
-            <a href="#{{value.ID}}">
+            <a href="{% url 'game' value.ID %}">
                 <span>{{value.VT}} {{value.VS}}</span><br>
                 <span>{{value.HT}} {{value.HS}}</span>
             </a>
